@@ -5,10 +5,6 @@ Payment methods
 2. Paytm
 3. PhonePe
 
-To download this example, simply clone this repository:
-
-git clone https://github.com/YeshJojo/payment-android
-
 # Index
 
 1. Paytm Integration with SDK Setup - [Paytm Setup](https://developer.paytm.com/docs/v1/android-sdk/) :
