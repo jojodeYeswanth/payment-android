@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paytm Integration"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dip"/>
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/orderamt"
+            android:inputType="numberDecimal"
+            android:hint="Enter Amount"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/orderid"
+            android:inputType="numberDecimal"
+            android:hint="Order ID"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/custid"
+            android:hint="Customer ID"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_transaction"
+            android:text="Start Transaction"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:background="@drawable/button_signin_background"
+            android:textColor="@android:color/white"
+            android:padding="15dp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dip"/>
+    </LinearLayout>
+</ScrollView>
