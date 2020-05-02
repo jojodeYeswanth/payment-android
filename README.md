@@ -11,5 +11,6 @@ git clone https://github.com/YeshJojo/payment-android
 
 # Index
 
-1. PayTM Integration with SDK Setup - [Paytm Setup](https://developer.paytm.com/docs/v1/android-sdk/) :
+1. Paytm Integration with SDK Setup - [Paytm Setup](https://developer.paytm.com/docs/v1/android-sdk/) :
+   
    For testing Paytm payment in android app you don’t need to activate your account. But for production purpose your paytm account must be activated
