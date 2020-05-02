@@ -162,7 +162,7 @@
                 <androidx.cardview.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/amazonpayCard"
+                    android:id="@+id/bhimpayCard"
                     android:layout_width="180dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp">
@@ -174,12 +174,12 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/amazon" />
+                            android:src="@drawable/bhimupi" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Amazon Pay"
+                            android:text="BHIM UPI Pay"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
                         <View

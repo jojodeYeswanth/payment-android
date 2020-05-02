@@ -34,7 +34,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
     private static final long SHIPPING_COST_CENTS = 90 * PaymentsUtil.CENTS_IN_A_UNIT.longValue();
     private PaymentsClient paymentsClient;
-    CardView googlePayCard, phonePeCard, paytmCard, amazonCard;
+    CardView googlePayCard, phonePeCard, paytmCard, bhimCard;
     CardView googlePaySdk, phonePeSdk, paytmSdk;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -51,7 +51,7 @@ public class CheckoutActivity extends AppCompatActivity {
         googlePayCard = findViewById(R.id.gpayCard);
         paytmCard = findViewById(R.id.paytmCard);
         phonePeCard = findViewById(R.id.phonepeCard);
-        amazonCard = findViewById(R.id.amazonpayCard);
+        bhimCard = findViewById(R.id.bhimpayCard);
 
         googlePaySdk = findViewById(R.id.gpayCardSDK);
         paytmSdk = findViewById(R.id.paytmCardSDK);
@@ -81,12 +81,10 @@ public class CheckoutActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        amazonCard.setOnClickListener(new View.OnClickListener() {
+        bhimCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CheckoutActivity.this, Payment.class);
-                intent.putExtra("Package", "amazonpay");
-                startActivity(intent);
+                startActivity(new Intent(CheckoutActivity.this, Payment.class));
             }
         });
 

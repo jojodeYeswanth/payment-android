@@ -37,7 +37,10 @@ public class Payment extends AppCompatActivity {
         noteEt = findViewById(R.id.note);
         nameEt = findViewById(R.id.name);
         upiIdEt = findViewById(R.id.upi_id);
-        Package = getIntent().getStringExtra("Package");
+        Package = "";
+        if(!getIntent().getStringExtra("Package").isEmpty()){
+            Package = getIntent().getStringExtra("Package");
+        }
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

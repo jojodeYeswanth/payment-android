@@ -96,7 +96,7 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
             PaytmPGService Service = PaytmPGService.getStagingService();
 
             HashMap<String, String> paramMap = new HashMap<String, String>();
-            paramMap.put("MID", MercahntKey); //MID provided by paytm
+            paramMap.put("MID", MercahntKey);
             paramMap.put("ORDER_ID", order_id);
             paramMap.put("CUST_ID", cust_id);
             paramMap.put("CHANNEL_ID", "WAP");
@@ -104,7 +104,6 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("WEBSITE", "WEBSTAGING");
             paramMap.put("CALLBACK_URL" ,varifyurl);
             paramMap.put("CHECKSUMHASH" ,CHECKSUMHASH);
-            //paramMap.put("PAYMENT_TYPE_ID" ,"CC");    // no need
             paramMap.put("INDUSTRY_TYPE_ID", "Retail");
             PaytmOrder Order = new PaytmOrder(paramMap);
             Log.e("checksum ", "param "+ paramMap.toString());
