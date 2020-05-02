@@ -84,7 +84,9 @@ public class CheckoutActivity extends AppCompatActivity {
         bhimCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CheckoutActivity.this, Payment.class));
+                Intent intent = new Intent(CheckoutActivity.this, Payment.class);
+                intent.putExtra("Package", "bhim");
+                startActivity(intent);
             }
         });
 

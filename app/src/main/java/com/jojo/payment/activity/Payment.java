@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jojo.payment.R;
@@ -26,6 +27,7 @@ public class Payment extends AppCompatActivity {
     String PHONEPE_PACKAGE_NAME = "com.phonepe.app";
     String AMAZON_PACKAGE_NAME = "com.amazon.pay";
     String Package;
+    ImageView methodImg;
     final int UPI_PAYMENT = 0;
 
     @Override
@@ -37,10 +39,20 @@ public class Payment extends AppCompatActivity {
         noteEt = findViewById(R.id.note);
         nameEt = findViewById(R.id.name);
         upiIdEt = findViewById(R.id.upi_id);
-        Package = "";
-        if(!getIntent().getStringExtra("Package").isEmpty()){
-            Package = getIntent().getStringExtra("Package");
-        }
+        methodImg = findViewById(R.id.methodImg);
+        Package = getIntent().getStringExtra("Package");
+
+        assert Package != null;
+        if(!Package.isEmpty())
+            if(Package.equals("paytm"))
+                methodImg.setImageResource(R.drawable.paytm);
+            else if(Package.equals("googlepay"))
+                methodImg.setImageResource(R.drawable.googlepay_button_content);
+            else if(Package.equals("phonepe"))
+                methodImg.setImageResource(R.drawable.phonepe);
+            else if(Package.equals("bhim"))
+                methodImg.setImageResource(R.drawable.bhimupi);
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
