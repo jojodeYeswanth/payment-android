@@ -58,49 +58,6 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     android:background="#696969" />
-                <EditText
-                    android:id="@+id/orderid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/multimedia"
-                    android:drawableTint="#696969"
-                    android:inputType="numberDecimal"
-                    android:hint="Order ID"
-                    android:padding="15dp"
-                    android:textColor="#191919"
-                    android:textColorHint="#696969"
-                    android:textStyle="bold" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="#696969" />
-                <EditText
-                    android:id="@+id/custid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/multimedia"
-                    android:drawableTint="#696969"
-                    android:hint="Customer ID"
-                    android:padding="15dp"
-                    android:textColor="#191919"
-                    android:textColorHint="#696969"
-                    android:textStyle="bold" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="#696969" />
                 <Button
                     android:id="@+id/start_transaction"
                     android:layout_width="match_parent"

@@ -1,12 +1,8 @@
 package com.jojo.payment.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +10,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.jojo.payment.R;
 import com.jojo.payment.util.JSONParser;
@@ -28,10 +27,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransactionCallback {
     private static String MercahntKey = "ATMIMC97739829232153";
-    EditText orderid, custid, price;
+    EditText price;
     String order_id, cust_id, price_amt;
 
     @Override
@@ -40,14 +40,12 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
         setContentView(R.layout.activity_paytm_sdk);
 
         Button btn = findViewById(R.id.start_transaction);
-        orderid = findViewById(R.id.orderid);
-        custid = findViewById(R.id.custid);
         price = findViewById(R.id.orderamt);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                order_id = orderid.getText().toString();
-                cust_id = custid.getText().toString();
+                order_id = createRandomOrderId();
+                cust_id = createRandomCustId();
                 price_amt = price.getText().toString();
                 sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
                 dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -59,6 +57,7 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class sendUserDetailTOServerdd extends AsyncTask<ArrayList<String>, Void, String> {
         private ProgressDialog dialog = new ProgressDialog(PaytmSdk.this);
         String url ="http://enactive-words.000webhostapp.com/paytm/generateChecksum.php";
@@ -69,21 +68,20 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
             this.dialog.setMessage("Loading...");
             this.dialog.show();
         }
-        protected String doInBackground(ArrayList<String>... alldata) {
+        @SafeVarargs
+        protected final String doInBackground(ArrayList<String>... alldata) {
             JSONParser jsonParser = new JSONParser(PaytmSdk.this);
             String param= "MID="+ MercahntKey + "&ORDER_ID=" + order_id + "&CUST_ID="+ cust_id +
-                    "&CHANNEL_ID=WAP&TXN_AMOUNT=100&WEBSITE=WEBSTAGING"+
+                    "&CHANNEL_ID=WAP&TXN_AMOUNT="+ price_amt +"&WEBSITE=WEBSTAGING"+
                     "&CALLBACK_URL="+ varifyurl+"&INDUSTRY_TYPE_ID=Retail";
             JSONObject jsonObject = jsonParser.makeHttpRequest(url,"POST",param);
             Log.e("CheckSum result >>",jsonObject.toString());
-            if(jsonObject != null){
-                Log.e("CheckSum result >>",jsonObject.toString());
-                try {
-                    CHECKSUMHASH = jsonObject.has("CHECKSUMHASH")?jsonObject.getString("CHECKSUMHASH"):"";
-                    Log.e("CheckSum result >>",CHECKSUMHASH);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            Log.e("CheckSum result >>",jsonObject.toString());
+            try {
+                CHECKSUMHASH = jsonObject.has("CHECKSUMHASH")?jsonObject.getString("CHECKSUMHASH"):"";
+                Log.e("CheckSum result >>",CHECKSUMHASH);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
             return CHECKSUMHASH;
         }
@@ -95,7 +93,7 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
             }
             PaytmPGService Service = PaytmPGService.getStagingService();
 
-            HashMap<String, String> paramMap = new HashMap<String, String>();
+            HashMap<String, String> paramMap = new HashMap<>();
             paramMap.put("MID", MercahntKey);
             paramMap.put("ORDER_ID", order_id);
             paramMap.put("CUST_ID", cust_id);
@@ -141,5 +139,35 @@ public class PaytmSdk extends AppCompatActivity implements PaytmPaymentTransacti
     protected void onStart() {
         super.onStart();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    protected String createRandomCustId() {
+        String val = "DI";
+        int ranChar = 65 + (new Random()).nextInt(90-65);
+        char ch = (char)ranChar;
+        val += ch;
+
+        Random r = new Random();
+        int numbers = 100000 + (int)(r.nextFloat() * 899900);
+        val += String.valueOf(numbers);
+
+        val += "-";
+        for(int i = 0; i<6;){
+            int ranAny = 48 + (new Random()).nextInt(90-65);
+            if(!(57 < ranAny && ranAny<= 65)){
+                char c = (char)ranAny;
+                val += c;
+                i++;
+            }
+        }
+        return val;
+    }
+    protected String createRandomOrderId() {
+        long timeSeed = System.nanoTime();
+        double randSeed = Math.random() * 1000;
+        long midSeed = (long) (timeSeed * randSeed);
+        String s = midSeed + "";
+
+        return s.substring(0, 9);
     }
 }
